@@ -35,6 +35,8 @@ defmodule ConferenceWall.Mixfile do
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 2.1"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
+     {:extwitter, "~> 0.2"},
+     {:oauth, github: "tim/erlang-oauth"},
      {:cowboy, "~> 1.0"}]
   end
 

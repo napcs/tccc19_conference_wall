@@ -11,6 +11,7 @@ defmodule ConferenceWall do
       supervisor(ConferenceWall.Endpoint, []),
       # Start the Ecto repository
       worker(ConferenceWall.Repo, []),
+      worker(ConferenceWall.TwitterService, []),
       # Here you could define other workers and supervisors as children
       # worker(ConferenceWall.Worker, [arg1, arg2, arg3]),
     ]

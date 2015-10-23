@@ -1,6 +1,7 @@
 defmodule ConferenceWall.WallChannel do
   use Phoenix.Channel
   def join("walls:" <> topic, message, socket) do
+    ConferenceWall.TwitterService.subscribe_to_topic topic
     {:ok, socket}
   end
 

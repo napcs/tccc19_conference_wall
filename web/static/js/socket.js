@@ -36,6 +36,15 @@ channel.on('new_msg', (payload) => {
   chatWindow.appendChild(el);
 });
 
+channel.on('new_tweet', (payload) => {
+  let el = document.createElement('div');
+  let img = document.createElement('img');
+  img.src = payload.image;
+  el.innerHTML = payload.user + ": " + payload.body;
+  tweets.appendChild(img);
+  tweets.appendChild(el);
+});
+
 
 channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
