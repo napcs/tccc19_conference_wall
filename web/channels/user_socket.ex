@@ -2,7 +2,7 @@ defmodule ConferenceWall.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "rooms:*", ConferenceWall.RoomChannel
+  channel "walls:*", ConferenceWall.WallChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
