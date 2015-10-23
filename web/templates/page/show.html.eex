@@ -6,3 +6,7 @@
   <div class="col-sm-12" id="chat_window"> </div>
   <input class="col-sm-12" placeholder="Message..." id="message_box">
 </div>
+<script>
+  window.topic = "<%= @id %>";
+</script>
+
