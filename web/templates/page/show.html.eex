@@ -1,12 +1,3 @@
-<div class="row">
-  <div class="col-sm-12" id="tweets">
-  </div>
+<div class="row" ng-app="wallApp">
+  <ng-view> </ng-view>
 </div>
-<div class="row">
-  <div class="col-sm-12" id="chat_window"> </div>
-  <input class="col-sm-12" placeholder="Message..." id="message_box">
-</div>
-<script>
-  window.topic = "<%= @id %>";
-</script>
-

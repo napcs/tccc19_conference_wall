@@ -9,45 +9,5 @@ let socket = new Socket("/socket", {});
 
 socket.connect();
 
-// Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("walls:" + window.topic, {});
-let tweets = document.getElementById('tweets');
-let chatWindow = document.getElementById('chat_window');
-let messageBox = document.getElementById('message_box');
-
-
-messageBox.addEventListener('keydown', event => {
-  if (event.which === 13) {
-    channel.push("new_msg", {body: messageBox.value})
-      .receive("ok", payload => {
-        let el = document.createElement('div');
-        el.innerHTML = "Me: " + payload.body;
-        chatWindow.appendChild(el);
-        messageBox.value = "";
-      })
-      .after(2000, () => console.log("waited for 2s"));
-
-  }
-});
-
-channel.on('new_msg', (payload) => {
-  let el = document.createElement('div');
-  el.innerHTML = "Anonymous: " + payload.body;
-  chatWindow.appendChild(el);
-});
-
-channel.on('new_tweet', (payload) => {
-  let el = document.createElement('div');
-  let img = document.createElement('img');
-  img.src = payload.image;
-  el.innerHTML = payload.user + ": " + payload.body;
-  tweets.appendChild(img);
-  tweets.appendChild(el);
-});
-
-
-channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
 
 export default socket
