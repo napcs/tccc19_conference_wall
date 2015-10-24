@@ -21,3 +21,24 @@ channel.join()
 
 var WallApp = angular.module("wallApp", []);
 
+WallApp.controller("TweetsController", function($scope) {
+  this.tweets = [];
+  this.greeting =  `Tweets about #${window.topic}`;
+
+  this.listen_to_tweets = function() {
+    channel.on("new_tweet", message => { 
+      if (!findById(message.id, this.tweets)){
+        this.tweets.push(message);
+        if (this.tweets.length > 20){
+          this.tweets.shift();
+        }
+        $scope.$apply();
+      }
+    })
+  };
+
+  function findById(id, tweets) {
+    return tweets.find(function(tweet) { return tweet.id == id });
+  }
+
+});
