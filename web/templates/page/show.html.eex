@@ -19,7 +19,30 @@
 
     </div> 
   </div>
+
+
+  <div class="col-lg-6" >
+    <div ng-controller="MessagesController as controller" ng-init="controller.listen_to_chat()">
+      <div class="row">
+        <label for="username">Username</label>
+        <input type="text" name="username" ng-model="controller.user" /> 
+      </div>
+      <div class="row">
+        <h2>Chatting about {{controller.topic}}</h2>
+        <div class="panel panel-default" ng-repeat="message in controller.messages track by $index">
+          <div class="panel-body">
+            <b>{{message.user}}:</b> <span>{{message.body}}</span>
+          </div>
+        </div>
+        <input id="message_box" class="col-sm-12" type="text" ng-model="controller.message_box"  ng-keypress="controller.send_message($event)" placeholder="Send message..."/>
+      </div>
+    </div>
+  </div>
+
+
 </div>
+
+
 
 <script>
   window.topic = "<%= @id %>";

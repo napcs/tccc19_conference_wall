@@ -42,3 +42,32 @@ WallApp.controller("TweetsController", function($scope) {
   }
 
 });
+
+WallApp.controller("MessagesController", function($scope) {
+  this.messages = [];
+  this.topic = `#${window.topic}`;
+
+  this.listen_to_chat = function() {
+    channel.on("new_msg", message => {
+      display_message({body: message.body, user: message.user}, this.messages);
+      $scope.$apply();
+    })
+  };
+
+  this.send_message = function(keyEvent){
+    if (keyEvent.which === 13) {
+      display_message({body: this.message_box, user: "Me"}, this.messages);
+      channel.push("new_msg", {body: this.message_box, user: this.user})
+        .receive("ok", payload => console.log('message received') )
+        .after(2000, () => console.log("waiting for 2s") );
+      this.message_box = null;
+    }
+  }
+
+  function display_message(message, messages){
+    if (messages.indexOf(message) == -1){
+      messages.push(message);
+    } 
+  }
+
+});
